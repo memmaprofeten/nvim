@@ -44,7 +44,7 @@ lazy.opts = {}
 lazy.setup({
   {'folke/tokyonight.nvim'},
   {'nvim-lualine/lualine.nvim'},
-  {'lukas-reineke/indent-blankline.nvim'},
+  {'lukas-reineke/indent-blankline.nvim', main="ibl", opts={}},
   {'nvim-treesitter/nvim-treesitter'},
   {'williamboman/mason.nvim'},
   {'williamboman/mason-lspconfig.nvim'},
@@ -80,10 +80,7 @@ require('lualine').setup({
   }
 })
 
-require('indent_blankline').setup({
-  show_trailing_blankline_indent = true,
-  use_treesitter = true,
-})
+require('ibl').setup({})
 
 require('nvim-treesitter.configs').setup({
   highlight = {
@@ -95,13 +92,18 @@ require('nvim-treesitter.configs').setup({
     'clojure',
     'rust',
     'toml',
+    'python',
   },
 })
 
 -- Language server setup
 require('mason').setup()
 require('mason-lspconfig').setup {
-  ensure_installed = {'hls', 'lua_ls', 'clojure_lsp'},
+  ensure_installed = {
+ --   'hls',
+    'lua_ls',
+    'clojure_lsp',
+  },
 }
 
 local lspconfig = require('lspconfig')
